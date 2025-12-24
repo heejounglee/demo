@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 목록 API 예제</title>
+</head>
+<body>
+<h1>회원 목록</h1>
+<ul id="memberList">
+    <!-- JavaScript로 여기에 회원 목록이 추가됩니다 -->
+</ul>
+
+<script>
+    // Fetch API를 사용하여 서버의 REST API 엔드포인트에 요청 보냄
+    fetch('/api/member/list')
+        .then(response => response.json()) // 응답을 JSON 객체로 파싱
+        .then(members => {
+            const list = document.getElementById('memberList');
+
+            // 가져온 회원 목록을 화면에 출력
+            members.forEach(member => {
+                const li = document.createElement('li');
+                li.textContent = `ID: ${member.userid}, 이름: ${member.name}님`;
+                list.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error fetching members:', error));
+</script>
+</body>
+</html>

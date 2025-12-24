@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 폼</title>
+    <script src="/js/common.js"></script>
+</head>
+<body>
+<h1>로그인 (AJAX/Fetch 방식)</h1>
+<form action="/api/member/loginPost" method="POST">
+    <table>
+        <tr>
+            <td>아이디</td>
+            <td> <input type="text" name="userid"> </td>
+        </tr>
+        <tr>
+            <td>암 호</td>
+            <td><input type="password" name="pwd"></td>
+        </tr>
+    </table>
+    <button type="submit">로그인</button>
+    <p id="msg"></p>
+</form>
+
+<hr>
+<a href="/member.html">회원 목록</a>
+
+<script>
+    // Fetch API를 사용하여 서버의 REST API 엔드포인트에 요청 보냄
+    fetch('/api/member/login')
+        .then(response => response.json()) // 응답을 JSON 객체로 파싱
+        .then(msg => {
+            const msg = document.getElementById('msg');
+
+            if (msg) {
+                msg.textContent = serverData;
+            }
+        })
+        .catch(error => console.error('Error msg:', error));
+</script>
+
+</body>
+</html>
